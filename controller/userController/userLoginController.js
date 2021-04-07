@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
-const User = require('../model/User');
-
+const User = require("../../model/User")
+var jwt = require('jsonwebtoken');
+const secretkey = "key"
 const userLoginController = async (req,res) =>{
     
     try{
@@ -15,11 +16,11 @@ const userLoginController = async (req,res) =>{
                   phone : user.phone,
               }
 
-               const token = jwt.sign(data , )
+               const token = jwt.sign(data ,secretkey )
                if(isValid){
                         res.json({
                             message:'User login success',
-                            result
+                            token
                         })
                     } else {
                         res.json({

@@ -1,14 +1,15 @@
 const express = require('express')
 const router = require('./router/routers')
+const todorouter = require('./router/todoRouter')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 
 const app = express()
 require('dotenv').config()
 
-app.use(bodyParser.json());
+app.use(express.json());
 
-app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(bodyParser.urlencoded({ extended: true }))
 
 // DB connect 
 const url = process.env.MONGO_URL
@@ -18,9 +19,9 @@ mongoose.connect(url,
       useCreateIndex:true });
 
 app.use(router)
+// todo 
+app.use('/todo',todorouter)
 
-
- 
 app.get('/', (req,res)=>{
     res.send("I am from root")
 })
